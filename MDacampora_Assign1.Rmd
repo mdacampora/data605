@@ -1,0 +1,126 @@
+---
+title: "DATA 605 Assignment 1"
+author: "Michael D'Acampora"
+date: "February 3, 2018"
+output: html_document
+---
+
+
+* Problem Set 1
+
+1. Calculate the dot product u.v where u = [0.5; 0.5] and v = [3; −4]
+
+```{r}
+u = c(0.5, 0.5)
+v = c(3, -4)
+paste("The dot product of u and v is:", u %*% v)
+```
+
+2. What are the lengths of u and v? Please note that the mathematical notion of the length of a vector is not the same as a computer science definition.
+
+```{r}
+# the formula for the length of a vector is the Pythagorean formula
+
+lenU <-  sqrt(sum(u^2))
+lenV <-  sqrt(sum(v^2))
+paste("The lengths of u and v are", lenU, "and", lenV, ", respectively")
+```
+
+3. What is the linear combination: 3u − 2v?
+
+```{r}
+linCombo<- 3 * u - 2 * v
+paste(c("The linear combination of 3u - 2v is", linCombo), collapse = " ")
+
+```
+
+4. What is the angle between u and v?
+
+```{r}
+theta <- acos(sum(u*v) / (sqrt(sum(u * u)) * sqrt(sum(v * v))))
+theta * 180 / pi
+```
+
+* Problem Set 2
+
+Set up a system of equations with 3 variables and 3 constraints and solve for x. Please write a function in R that will take two variables (matrix A & constraint vector b) and solve using elimination. Your function should produce the right answer for the system of equations for any 3-variable, 3-equation system. You don’t have to worry about degenerate cases and can safely assume that the function will only be tested with a system of equations that has a solution. Please note that you do have to worry about zero pivots, though. Please note that you should not use the built-in function solve to solve this system or use matrix inverses. The approach that you should employ is to construct an Upper Triangular Matrix and then back-substitute to get the solution. Alternatively, you can augment the matrix A with vector b and jointly apply the Gauss Jordan elimination procedure.
+
+```{r}
+
+# matrix = A
+matrix<- matrix(c(1,1,3,2,-1,5,-1,-2,4), 
+                      nrow=3,              
+                      ncol=3,              
+                      byrow = TRUE)        
+   
+# vector = b
+vector <- matrix(c(1,2,6), 
+                      nrow=3,              
+                      ncol=1,              
+                      byrow = TRUE)  
+                             
+# the function is for a 3x3 matrix
+upper.tri.mat <- function(A,b){
+  
+  # create the augmented matrix by combining matrix A and vector b
+  aug.mat <- cbind(A,b)
+  
+  # start with pivot at value of (1,1)
+  pivot1 <- aug.mat[1,1]
+  
+  # to zero out (2,1), we need to create a multiple by dividing by (1,1) and subtract row 2 from (row 1 * the multiple)
+  multiple <- aug.mat[2,1] / pivot1
+  aug.mat[2, ] <- aug.mat[2,] - aug.mat[1,] * multiple
+
+  # we do the same thing for row 3, divide by (1,1) and subtract row 3 from (row 1 * the multiple)
+  multiple <- aug.mat[3,1] / pivot1
+  aug.mat[3, ] <- aug.mat[3, ] - aug.mat[1, ] * multiple
+  
+  # since we are operating with rows 2 and 3, we need to create a new pivot point with which to create a multiple
+  # since 2,1 has been zeroed out we will select 2,2 to work with
+  pivot2 <- aug.mat[2,2]
+  multiple <- aug.mat[3,2] / pivot2
+  aug.mat[3, ] <- aug.mat[3, ] - aug.mat[2, ] * multiple
+  
+  # now we can solve for x1, x2, and x3
+  x3 <- aug.mat[3,4] / aug.mat[3,3]
+  x2 <- (aug.mat[2,4] - aug.mat[2,3] * x3) / aug.mat[2,2]
+  x1 <- (aug.mat[1,4] - aug.mat[1,3] * x3 - aug.mat[1,2] * x2) / aug.mat[1,1]
+  
+  solution <- c(x1,x2,x3)
+  solution
+}
+
+
+```
+
+Please test it with the system below and it should produce a solution x = [-1.55, -0.32, 0.5]
+```{r}
+round(upper.tri.mat(matrix, vector),2)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

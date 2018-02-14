@@ -1,0 +1,18 @@
+---
+title: "Discussion Week 1"
+author: "Michael D'Acampora"
+date: "January 31, 2018"
+output: html_document
+---
+
+
+C31 - Find all solutions to the linear system:
+            
+            x + y = 5
+           2x - y = 3
+```{r}
+A <- matrix(data=c(1, 1, 2, -1), nrow = 2, ncol = 2, byrow = TRUE)
+b <- matrix(data=c(5, 3), nrow = 2, ncol = 1, byrow = FALSE)
+round(solve(A, b), 2)
+```
+           
