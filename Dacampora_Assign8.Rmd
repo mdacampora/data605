@@ -1,0 +1,71 @@
+---
+title: "Assignment 8"
+author: "Michael D'Acampora"
+date: "March 21, 2018"
+output: html_document
+---
+
+**11. A company buys 100 lightbulbs, each of which has an exponential lifetime of 1000 hours. What is the expected time for the first of these bulbs to burn out? (See Exercise 10.)**
+
+$$R(t) = R_0e^{-t/c}$$
+
+```{r}
+R_t <- 99
+R_o <- 100
+c <- 1000
+
+t <- -1 * (c * log(R_t/R_o))
+round(t, 2)
+```
+
+
+
+
+**14. Assume that X 1 and X 2 are independent random variables, each having an exponential density with parameter λ. Show that Z = X 1 − X 2 has density fZ (z) = (1/2)λe −λ|z|.**
+
+```{r}
+
+```
+
+
+
+
+**1. Let X be a continuous random variable with mean μ = 10 and variance σ 2 = 100/3. Using Chebyshev’s Inequality, find an upper bound for the following probabilities.**
+
+
+$$P\big[(x-\mu)^2\geq~k^2\big]\leq\frac{(x-\mu)^2}{k^2}=\frac{\sigma^2}{k^2}$$
+**(a) P (|X − 10| ≥ 2).**
+```{r}
+variance <- 100/3
+k <- 2
+
+variance/k^2
+```
+
+
+**(b) P (|X − 10| ≥ 5).**
+```{r}
+variance <- 100/3
+k <-  5
+
+variance/k^2
+```
+
+
+**(c) P (|X − 10| ≥ 9).**
+```{r}
+variance <- 100/3
+k <- 9
+
+variance/k^2
+```
+
+
+**(d) P (|X − 10| ≥ 20).**
+```{r}
+variance <- 100/3
+k <- 20
+
+variance/k^2
+```
+
