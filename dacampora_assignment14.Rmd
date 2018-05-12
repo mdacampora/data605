@@ -26,7 +26,7 @@ The pattern emerging is $f^{(n)}= \frac{n!}{(1-x)^{n+1}}$, which when applied to
 
 2. $f(x) = e^x$
 
-Since the derivative of $e^x$ is itself, any number of derivations will yield the same result. With that regard, $f^{n}=e^x$. 
+Since the derivative of $e^x$ is itself, any number of derivations will yield the same result. With that regard, $f^{(n)}=e^x$. 
 Applying the Taylor Series defintion for x=0 gives us:
 $$f(x) = \sum_{n=0}^{\infty} \frac{e^{(0)}}{n!}(x)^n = \sum_{n=0}^{\infty} \frac{x^n}{n!}$$
 
