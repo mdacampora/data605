@@ -1,0 +1,73 @@
+---
+title: "Assigment 15"
+author: "Michael D'Acampora"
+date: "May 13, 2018"
+output: html_document
+---
+
+1. Find the equation of the regression line for the given points.  Round any final values to the nearest hundredth, if necessary.
+
+$$( 5.6, 8.8 ), ( 6.3, 12.4 ), ( 7, 14.8 ), ( 7.7, 18.2 ), ( 8.4, 20.8 )$$
+```{r}
+x <- c(5.6, 6.3, 7, 7.7, 8.4)
+y <- c(8.8, 12.4, 14.8, 18.2, 20.8)
+
+mod <- lm(y ~ x)
+mod
+```
+
+The equation of the linear regression line is $y = -14.8 + 4.26x$
+
+
+2. Find all local maxima, local minima, and saddle points for the function given below. Write your answer(s) in the form (x,y,z). Separate multiple points with a comma.
+$$f(x,y)=24x-6xy^2-8y^3$$
+
+We will take the partial derivative with respect to x and solve for y:
+
+$$\frac{\delta}{\delta x}=24-6y^2=0$$
+
+$$y^2=4; ~~~y=2, y=-2$$
+
+Now we take solutions for y and solve for the partial derivative with respect to x 
+$$\frac{\delta}{\delta y}=-12xy-24y^2=xy+2y^2=0$$
+
+Plugging in y=2
+$$x(2)+2(2)^2=0$$
+$$x=-4$$
+
+Plugging in y=-2
+$$x(-2)+2(-2)^2=0$$
+$$x=4$$
+
+Critical points are (-4,2) and (4,2)
+
+We need to take the second derivative to find whether the points are minima, maxima, saddlesa.
+
+$$\frac{\delta^2}{\delta x^2}=0$$
+
+
+$$\frac{\delta^2}{\delta y^2}=-12x-48y^2$$
+
+finding $f_{xy}$:
+$$f_{xy}=-12y$$
+
+http://bonlacfoods.com/pdf/018077980.pdf
+
+Classifying stationary points
+
+ if $f_{xx}f_{yy}-f^2_{xy} < 0$ at (a,b), then (a,b) is a saddle point
+
+ if $f_{xx}f_{yy}-f^2_{xy} > 0$ at (a,b), then (a,b) is a maximum or minimum and is distinguished as follows:
+
+  if $f_{xx} < 0$ and $f_{yy} < 0$ at (a,b) then (a,b) is a maximum point
+
+  if $f_{xx} > 0$ and $f_{yy} > 0$ at (a,b) then (a,b) is a minimum point
+  
+
+$$D=0*(-12x-48y^2)-(-12y)^2=12y^2$$
+
+At $(4, -2)$:
+$D = 12(2)^2>0$ which is a max or min, and $-12(4)-48(-2)^2=-240$ which tells us it is a maxima.
+
+At $(-4,2)$
+$D = 12(-2)^2>0$ which is a max or min, and $-12(-4)-48(2)^2=-144$ which tells us it is also a maxima.
