@@ -1,0 +1,70 @@
+---
+title: "DATA 605 Final"
+author: "Michael D'Acampora"
+date: "May 18, 2018"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+house_data <- read.csv('https://raw.githubusercontent.com/mjdacs/data605/master/train.csv', header = TRUE)
+head(house_data)
+```
+
+
+Pick one of the quantitative variables from the training set, and define that variable x. Make sure this variable is skewed to the right!
+
+```{r}
+hist(house_data$BsmtUnfSF)
+```
+
+We see that `GrLivArea` --ground living area (sft)-- has a right skew. Additionally, `SalesPrice` is our chosen dependent variable. 
+```{r}
+
+X <- house_data$BsmtUnfSF
+
+Y <- house_data$SalePrice
+
+
+#house_data <- house_data %>% 
+#  rename(X = SalePrice,
+#         Y = LotArea) 
+
+#head(house_data)
+```
+
+Probability. Calculate as a minimum the belwo probabilities a through c. Assume the small letter 'x' is estimated ast he 1st quartile of the X variable, and the small letter 'y' is the 1st quartile of the Y variable. Interpret the meaning of all probabilities. In addition, make a table of counts as shown below.
+
+We run a summary of `BsmtUnfSF` to confirm the right skew.
+```{r}
+summary(X)
+```
+
+Since the Mean > Median, it confirms the right skew.
+
+We also run a summary of the dependent variable `SalesPrice`, or Y
+
+```{r}
+summary(Y)
+```
+  
+  a. $P(X>x~~ | ~~Y>y)$
+  
+We are asking what is the probability that X variable is greater than its first quartile given that Y is larger than the its second quartile. 
+```{r}
+
+#  quartiles for BsmtUnfSF
+q1_x <- summary(X)[2]
+q2_x <- summary(X)[3]
+q3_x <- summary(X)[5]
+
+# quartiles for SalesPrice
+q1_x <- summary(Y)[2]
+q2_x <- summary(Y)[3]
+q3_x <- summary(Y)[5]
+
+```
+ 
+  b. $P(X>x, Y>y)$
+  
+  c. $P(X<x~~ | ~~Y>y)$
